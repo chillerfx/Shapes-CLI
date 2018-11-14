@@ -73,13 +73,14 @@ JavaSE-1.8
 MySQL5
 
 ### How to
-**1.** Clone this repo
-**3.** Install dependecies with 
+**1.** Clone this repo.
+
+**2.** Install dependecies with 
 ```
 mvn install
 ```
-**2.** Edit  ``` application.properties ``` file with mysql connection strings and table(shema) name
-**3.** Run ``` mvn package ``` to package the application
+**3.** Edit  ``` application.properties ``` file with mysql connection strings and table(shema) name
+**4.** Run ``` mvn package ``` to package the application
 
-**4.** Get back to me with feedback
+**5.** Get back to me with feedback
 
