@@ -26,15 +26,7 @@ import com.opencsv.CSVReader;
 
 @ShellComponent
 public class ShapeCommands implements ApplicationRunner {
-	public ShapeCommands() {
-
-	}
-
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		// do nothing
-	}
-
+	
 	@Autowired
 	SquareRepo squareRepo;
 
