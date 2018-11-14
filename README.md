@@ -1,8 +1,6 @@
 # Shapes-CLI
 Project for TeleSoftas.
 
-## A task to test ​​ JAVA ​​ developer
-
 ## Instructions
 
 It is a full programming exercise whose outcome should be code that can be compiled, executed and tested
