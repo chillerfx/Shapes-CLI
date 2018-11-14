@@ -79,7 +79,8 @@ MySQL5
 ```
 mvn install
 ```
-**3.** Edit  ``` application.properties ``` file with mysql connection strings and table(shema) name
+**3.** Edit  ``` application.properties ``` file with mysql connection strings and table(shema) name.
+
 **4.** Run ``` mvn package ``` to package the application
 
 **5.** Get back to me with feedback
