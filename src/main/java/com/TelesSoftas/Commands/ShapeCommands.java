@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.PositiveOrZero;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -25,8 +27,8 @@ import com.TelesSoftas.Repository.TriangleRepo;
 import com.opencsv.CSVReader;
 
 @ShellComponent
-public class ShapeCommands implements ApplicationRunner {
-	
+public class ShapeCommands {
+
 	@Autowired
 	SquareRepo squareRepo;
 
@@ -44,7 +46,7 @@ public class ShapeCommands implements ApplicationRunner {
 	@ShellMethod("Creates new circle shape.")
 	public String circle(@ShellOption(help = "X coordinate of circle center") Double x,
 			@ShellOption(help = "Y coordinate of circle center") Double y,
-			@ShellOption(help = "Radius of circle") Double radius) {
+			@ShellOption(help = "Radius of circle") @PositiveOrZero Double radius) {
 		Circle circle = new Circle(x, y, radius);
 		circleRepo.save(circle);
 		String response = String.format("Shape %s: %s", circle.getId().toString(), circle.toString());
@@ -73,8 +75,8 @@ public class ShapeCommands implements ApplicationRunner {
 	@ShellMethod("Creates new donut shape.")
 	public String donut(@ShellOption(help = "X coordinate of Donut center") Double x,
 			@ShellOption(help = "Y coordinate of Donut center") Double y,
-			@ShellOption(help = "Outer radius of donut") Double radius,
-			@ShellOption(help = "Inner radius of donut") Double innerRadius) {
+			@ShellOption(help = "Outer radius of donut") @PositiveOrZero Double radius,
+			@ShellOption(help = "Inner radius of donut") @PositiveOrZero Double innerRadius) {
 		Donut donut = new Donut(x, y, radius, innerRadius);
 		donutRepo.save(donut);
 		String response = String.format("Shape %s: %s", donut.getId().toString(), donut.toString());
@@ -120,14 +122,13 @@ public class ShapeCommands implements ApplicationRunner {
 	@ShellMethod(value = "Parses csv file with shape data", group = "Other Commands")
 	public String parseCsv(@ShellOption(help = "relative path to csv file") String path) {
 		String response;
-		try
-		{
+		try {
 			CSVReader reader = new CSVReader(new FileReader(path));
 			List<String[]> csvEntries = reader.readAll();
 			reader.close();
 			response = csvEntries.parallelStream().map(line -> this.createClassFromLine(line))
-			.collect(Collectors.joining("\n"));
-			
+					.collect(Collectors.joining("\n"));
+
 		} catch (Exception e) {
 			response = e.toString();
 		}
